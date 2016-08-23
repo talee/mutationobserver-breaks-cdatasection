@@ -42,3 +42,5 @@ Tests pass on latest Chrome, Firefox, Safari and:
 Microsoft Edge 38.14393.0.0
 Microsoft EdgeHTML 14.14393
 ```
+
+Reported to Microsoft at https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/8589859/.
