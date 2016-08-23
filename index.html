@@ -2,12 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title></title>
-  <script src='document-register-element.max.js'></script>
+  <title>IE 11 MutationObserver.observe breaks Node.data access on hyphens</title>
   <script src='test.js'></script>
 </head>
 <body>
   <h1>IE 11 MutationObserver.observe breaks Node.data access on hyphens</h1>
+  <p>Must reset between tests.
+    <a href='https://github.com/talee/mutationobserver-breaks-cdatasection/'>GitHub source.</a>
+  </p>
+  <button id='test-observer' onclick='Test()'>Test with new MutationObserver</button>
+  <button id='test-events' onclick='Test(true)'>Test with deprecated MutationEvents</button>
+  <br/>
+  <br/>
+  <button id='reset' onclick='location.reload()'>Reset</button>
   <h2 id='status'></h2>
   <h2 id='result'></h2>
   <h2 id='expected'>Should be "hello-world"</h2>
