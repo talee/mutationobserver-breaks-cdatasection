@@ -3,6 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <title>IE 11 MutationObserver.observe breaks Node.data access on hyphens</title>
+  <script>
+    // Force usage of polyfill
+    window.MutationObserver = null;
+  </script>
+  <script src='MutationObserver.js'></script>
   <script src='test.js'></script>
 </head>
 <body>
