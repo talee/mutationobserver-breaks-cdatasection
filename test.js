@@ -2,7 +2,13 @@ function Test() {
   var statusOut = document.getElementById('status');
   var resultOut = document.getElementById('result');
 
-  document.registerElement('x-yolo');
+  var observer = new MutationObserver(function() {
+  });
+
+  observer.observe(document, {
+    childList: true,
+    subtree: true
+  });
 
   var parser = new DOMParser();
   var expectedContent = 'hello-world';
