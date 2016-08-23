@@ -30,7 +30,7 @@ function Test(useMutationEvents) {
     var expectedContent = 'hello-world';
     // <div>hello-world</div> breaks too. Using CDATA as that's my current use
     // case.
-    var xml = parser.parseFromString('<div><![CDATA[' + expectedContent + ']]></div>','text/xml')
+    var xml = parser.parseFromString('<div><![CDATA[' + expectedContent + ']]></div>','text/xml');
     var result = xml.firstChild.firstChild.data;
 
     // Output test results for viewing
