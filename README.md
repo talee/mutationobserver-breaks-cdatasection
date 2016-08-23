@@ -12,8 +12,15 @@ The CDATASection's data property should be `hello-world`, but is truncated aroun
 
 Demo page: https://talee.github.io/mutationobserver-breaks-cdatasection/. See [test.js](test.js).
 
-Workaround is to use MutationEvents, which is deprecated. This tests were done
-on IE 11 with the following versions:
+## Workarounds
+Workaround is to use MutationEvents, which is deprecated. A working
+MutationObserver polyfill that does this is
+https://github.com/webcomponents/webcomponentsjs/releases (the built file is in
+the source download).
+
+## Browser versions
+
+This tests were done on IE 11 with the following versions:
 
 ```
 Version: 11.0.9600.17843.
