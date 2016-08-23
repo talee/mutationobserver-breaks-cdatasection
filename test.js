@@ -6,22 +6,32 @@ function Test(useMutationEvents) {
   // Forces polyfill to use MutationEvents if testing that case
   if (useMutationEvents) {
     window.MutationObserver = null;
+
+    // Load MutationObserver polyfill that uses MutationEvents
+    var mutationObserverPolyfill = document.createElement('script');
+    mutationObserverPolyfill.src = 'MutationObserver.js';
+    mutationObserverPolyfill.onload = window.setTimeout(ParseTest, 500);
+    document.head.appendChild(mutationObserverPolyfill)
+  } else {
+    ParseTest()
   }
 
-  // Load polyfill that calls MutationObserver.observe dynamically as it caches
-  // MutationObserver on executing
-  var registerElementPolyfill = document.createElement('script');
-  registerElementPolyfill.src = 'document-register-element.max.js';
-  registerElementPolyfill.onload = window.setTimeout(ParseTest, 500);
-  document.head.appendChild(registerElementPolyfill)
-
   function ParseTest() {
-    // Calls MutationObserver.observe or MutationEvents depending on support or test
-    document.registerElement('x-yolo');
+    // BREAKING CODE
+    var observer = new MutationObserver(function() {});
+    // Other mutation types/combos work fine
+    observer.observe(document, {
+      childList: true,
+      subtree: true
+    });
+    // END BREAKING CODE
 
     var parser = new DOMParser();
     var expectedContent = 'hello-world';
-    var result = parser.parseFromString('<div><![CDATA[' + expectedContent + ']]></div>','text/xml').firstChild.firstChild.data;
+    // <div>hello-world</div> breaks too. Using CDATA as that's my current use
+    // case.
+    var xml = parser.parseFromString('<div><![CDATA[' + expectedContent + ']]></div>','text/xml')
+    var result = xml.firstChild.firstChild.data;
 
     // Output test results for viewing
     if (result != expectedContent) {

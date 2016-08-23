@@ -1,18 +1,24 @@
-# mutationobserver-breaks-cdatasection
+# mutationobserver-breaks-characterdata
 
-Using the `observe` method of a MutationObserver in Internet Explorer 11 breaks CDATASection data nodes on hyphens.
+Using the `observe` method of a MutationObserver in Internet Explorer 11 breaks
+CharacterData data property on hyphens.
 
 ```
-<div>
-  <![CDATA[hello-world]]>
-</div>
+<div><![CDATA[hello-world]]></div>
 ```
 
-The CDATASection's data property should be `hello-world`, but is truncated around the hypen and only `hello` is returned.
+The CDATASection's data property should be `hello-world`, but is truncated
+around the hypen and only `hello` is returned. Also breaks for:
 
-Demo page: https://talee.github.io/mutationobserver-breaks-cdatasection/. See [test.js](test.js).
+```
+<div>hello-world</div>
+```
+
+Demo page: https://talee.github.io/mutationobserver-breaks-characterdata/. See
+[test.js](test.js) for test code.
 
 ## Workarounds
+
 Workaround is to use MutationEvents, which is deprecated. A working
 MutationObserver polyfill that does this is
 https://github.com/webcomponents/webcomponentsjs/releases (the built file is in
